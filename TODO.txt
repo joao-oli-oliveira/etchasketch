@@ -1,0 +1,27 @@
+
+IDEAS
+960px wide sketching area 
+    100divs(10x10) or maybe 32x32
+    Option to change the "resolution"
+
+Right click to erase
+Middle click for color
+    (not all colors, make a selection. Not random but sequential change of color)
+Increase color opacity when cursor passed by multiple times
+Full board eraser
+    Slider
+Reveal the div boarders that are in a radius from cursor, the rest would be transparent (Super cool)
+Cursor that looks like a pen instead of original cursor. 
+Menu button 
+    Save button ??
+    Share button ??
+    Link to my stream 
+
+SUDO
+Divs as "pixels" <- created with JS
+eventListeners 
+    Mouse down
+    Hover
+    Mouse up
+
+Maybe loop eventListeners <- tutorial on bubbling 
