@@ -1,4 +1,5 @@
 const board = document.getElementById("board");
+const pixels = document.querySelectorAll("pixel");
 let isToggling = false;
 
 function enableToggle() {
@@ -21,6 +22,7 @@ for (let i = 0; i < 100; i++) {
   pixel.addEventListener("mouseover", () => {
     if (isToggling === true) {
       pixel.style.backgroundColor = "black";
+      pixel.style.opacity -= "-0.1";
     } // Only turns background black if mousedown
   });
 } // Creates the pixels on the board
