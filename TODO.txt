@@ -4,8 +4,8 @@ IDEAS
     100divs(10x10) or maybe 32x32
     Option to change the "resolution"
 
-Right click to erase
-Middle click for color
+Right click for color
+Middle click to erase
     (not all colors, make a selection. Not random but sequential change of color)
 Increase color opacity when cursor passed by multiple times
 Full board eraser

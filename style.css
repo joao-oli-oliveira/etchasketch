@@ -28,5 +28,5 @@ body {
 
 .pixel {
     flex-grow: 1;
-    border: 0.5px solid rgb(222, 222, 222);
+    border: 0.1px dotted rgb(221, 221, 221);
 }
