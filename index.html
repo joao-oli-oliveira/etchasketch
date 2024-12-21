@@ -9,10 +9,25 @@
   <body>
     <h1 id="heading">✍️ Pixel Sketcher</h1>
     <div id="menu">
-      <p class="instructions"></p>
-      <p class="instructions"></p>
-      <p class="instructions"></p>
-      <a href="#" id="share"></a>
+      <dialog class="settings">
+        <button autofocus>X</button> <br /><br />
+        <label for="resolution">Choose a resolution:</label>
+        <select id="resolution">
+          <option id="1024" value="1024">32x32</option>
+          <option id="100" value="100">10x10</option>
+        </select>
+        <br />
+        <br />
+        <p class="instructions">Draw: Click or Hold left mouse button</p>
+        <p class="instructions">Erase: Hold Shift</p>
+        <p class="instructions">Colour: Hold Control</p>
+        <br />
+        <br />
+        <a href="https://www.twitch.tv/oliandthebear" id="share"
+          >Follow me on Twitch!</a
+        >
+      </dialog>
+      <button id="menu">Menu</button>
     </div>
     <div id="board"></div>
     <div id="slider"></div>

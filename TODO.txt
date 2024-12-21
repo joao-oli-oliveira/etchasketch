@@ -4,8 +4,10 @@ IDEAS
     100divs(10x10) or maybe 32x32
     Option to change the "resolution"
 
+save user informaion using localStorage
+
 Right click for color
-Middle click to erase
+Middle click to erase (only do if we cant do slider)
     (not all colors, make a selection. Not random but sequential change of color)
 Increase color opacity when cursor passed by multiple times
 Full board eraser
