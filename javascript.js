@@ -4,34 +4,6 @@ const resSelect = document.getElementById("resolution");
 const dialog = document.querySelector("dialog");
 const showButton = document.querySelector("dialog + button");
 const closeButton = document.querySelector("dialog button");
-
-let isToggling = false;
-let isErase = false;
-let isColour = false;
-
-gameInit(1024);
-
-function enableToggle(e) {
-  console.log("enableToggle");
-  console.log(e);
-  isToggling = true;
-  if (e.shiftKey === true) {
-    isErase = true;
-  }
-}
-function disableToggle() {
-  console.log("disableToggle");
-  isToggling = false;
-  isErase = false;
-}
-
-window.addEventListener("keyup", function (e) {
-  console.log(e);
-  if (e.code === "KeyC") {
-    isColour = !isColour;
-  }
-});
-
 const cgaColours = [
   "#000000",
   "#555555",
@@ -51,19 +23,53 @@ const cgaColours = [
   "#ffff55",
 ];
 
-for (let i = 0; i < 16; i++) {
-  console.log(cgaColours[i]);
+let isToggling = false;
+let isErase = false;
+let isColour = false;
+
+gameInit(1024);
+
+function enableToggle(e) {
+  console.log("enableToggle");
+  isToggling = true;
+  if (e.shiftKey === true) {
+    isErase = true;
+  }
+}
+function disableToggle() {
+  console.log("disableToggle");
+  isToggling = false;
+  isErase = false;
 }
 
-function setPenSettings(pixel, toggling, erasing) {
-  if (!erasing && toggling) {
-    pixel.style.backgroundColor = "rgb(64, 46, 23)";
-    pixel.style.opacity -= "-0.1";
+window.addEventListener("keyup", function (e) {
+  if (e.code === "KeyC") {
+    isColour = !isColour;
+    console.log(isColour);
   }
+});
+
+// for (let i = 0; i < 16; i++) {
+//   setColour = cgaColours[i];
+// }
+
+function setPenSettings(pixel, toggling, erasing) {
+  if (!erasing && toggling & isColour) {
+    let setColourIndex = Math.floor(Math.random() * 16);
+    pixel.style.backgroundColor = cgaColours[setColourIndex];
+
+    pixel.style.opacity = "1";
+    console.log(pixel.colourIndex);
+  } //colour
+  if (!erasing && toggling && !isColour) {
+    pixel.style.opacity -= "-0.1";
+    pixel.style.backgroundColor = "rgb(64, 46, 23)";
+  } //black and white
   if (erasing && toggling) {
     pixel.style.backgroundColor = "rgb(199, 204, 208)";
     pixel.style.opacity = "0.1";
-  }
+  } //erase
+  console.log(pixel.colourIndex);
 }
 
 resSelect.addEventListener("change", function (e) {
