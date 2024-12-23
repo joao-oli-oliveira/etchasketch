@@ -65,3 +65,7 @@ body {
     display: flex;
     gap: 200px
 }
+
+#myRange {
+    width: 604px;
+  }

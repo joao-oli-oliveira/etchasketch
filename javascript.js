@@ -4,6 +4,8 @@ const resSelect = document.getElementById("resolution");
 const dialog = document.querySelector("dialog");
 const showButton = document.querySelector("dialog + button");
 const closeButton = document.querySelector("dialog button");
+const slider = document.getElementById("myRange");
+
 const cgaColours = [
   "#000000",
   "#555555",
@@ -26,6 +28,7 @@ const cgaColours = [
 let isToggling = false;
 let isErase = false;
 let isColour = false;
+let pixelArray = [];
 
 gameInit(1024);
 
@@ -47,11 +50,17 @@ window.addEventListener("keyup", function (e) {
     isColour = !isColour;
     console.log(isColour);
   }
-});
+}); // colour toggle
 
-// for (let i = 0; i < 16; i++) {
-//   setColour = cgaColours[i];
-// }
+slider.addEventListener("input", (e) => {
+  console.log(slider.value);
+  // let array = [slider.value, slider.value+(32*i), ...]
+  // pixelArray[array]
+
+  pixelArray[slider.value].style.backgroundColor = "rgb(199, 204, 208)";
+  pixelArray[slider.value].style.opacity = "0.1";
+});
+// slider
 
 function setPenSettings(pixel, toggling, erasing) {
   if (!erasing && toggling & isColour) {
@@ -92,8 +101,10 @@ function gameInit(tiles) {
     pixel.addEventListener("mouseover", (e) => {
       setPenSettings(pixel, isToggling, isErase);
     });
+    pixelArray.push(pixel);
   }
 }
+console.log(pixelArray);
 
 // "Show the dialog" button opens the dialog modally
 showButton.addEventListener("click", () => {
