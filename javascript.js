@@ -52,23 +52,27 @@ window.addEventListener("keyup", function (e) {
   }
 }); // colour toggle
 
-slider.addEventListener("input", (e) => {
-  console.log(slider.value);
-  // let array = [slider.value, slider.value+(32*i), ...]
-  // pixelArray[array]
-
-  pixelArray[slider.value].style.backgroundColor = "rgb(199, 204, 208)";
-  pixelArray[slider.value].style.opacity = "0.1";
+slider.addEventListener("input", () => {
+  const resGrid = Math.sqrt(resSelect.value);
+  slider.max = resGrid - 1;
+  for (let i = 0; i < resGrid; i++) {
+    if (pixelArray[+slider.value + resGrid * i].style.opacity > "0.1") {
+      pixelArray[+slider.value + resGrid * i].style.opacity -= "0.25";
+    }
+    if (pixelArray[+slider.value + resGrid * i].style.opacity <= "0.1") {
+      pixelArray[+slider.value + resGrid * i].style.backgroundColor =
+        "rgb(199, 204, 208)";
+      pixelArray[+slider.value + resGrid * i].style.opacity = "0.1";
+    }
+  }
 });
 // slider
 
 function setPenSettings(pixel, toggling, erasing) {
-  if (!erasing && toggling & isColour) {
+  if (!erasing && toggling && isColour) {
     let setColourIndex = Math.floor(Math.random() * 16);
     pixel.style.backgroundColor = cgaColours[setColourIndex];
-
     pixel.style.opacity = "1";
-    console.log(pixel.colourIndex);
   } //colour
   if (!erasing && toggling && !isColour) {
     pixel.style.opacity -= "-0.1";
@@ -87,24 +91,25 @@ resSelect.addEventListener("change", function (e) {
 
 function gameInit(tiles) {
   board.innerHTML = "";
+  pixelArray = [];
   let calMinWidth = 600 / Math.sqrt(tiles);
   for (let i = 0; i < tiles; i++) {
     const pixel = document.createElement("div");
     pixel.classList.add("pixel");
     pixel.style.minWidth = `${calMinWidth + "px"}`;
+    pixel.style.opacity = "0.1";
     board.appendChild(pixel);
     pixel.addEventListener("mousedown", enableToggle);
     pixel.addEventListener("mouseup", disableToggle);
     pixel.addEventListener("click", (e) => {
       setPenSettings(pixel, true, e.shiftKey);
     });
-    pixel.addEventListener("mouseover", (e) => {
+    pixel.addEventListener("mouseover", () => {
       setPenSettings(pixel, isToggling, isErase);
     });
     pixelArray.push(pixel);
   }
 }
-console.log(pixelArray);
 
 // "Show the dialog" button opens the dialog modally
 showButton.addEventListener("click", () => {
