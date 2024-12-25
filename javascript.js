@@ -33,14 +33,12 @@ let pixelArray = [];
 gameInit(1024);
 
 function enableToggle(e) {
-  console.log("enableToggle");
   isToggling = true;
   if (e.shiftKey === true) {
     isErase = true;
   }
 }
 function disableToggle() {
-  console.log("disableToggle");
   isToggling = false;
   isErase = false;
 }
@@ -48,7 +46,6 @@ function disableToggle() {
 window.addEventListener("keyup", function (e) {
   if (e.code === "KeyC") {
     isColour = !isColour;
-    console.log(isColour);
   }
 }); // colour toggle
 
@@ -56,17 +53,16 @@ slider.addEventListener("input", () => {
   const resGrid = Math.sqrt(resSelect.value);
   slider.max = resGrid - 1;
   for (let i = 0; i < resGrid; i++) {
-    if (pixelArray[+slider.value + resGrid * i].style.opacity > "0.1") {
-      pixelArray[+slider.value + resGrid * i].style.opacity -= "0.25";
+    let pixelID = parseInt(slider.value) + resGrid * i;
+    if (pixelArray[pixelID].style.opacity > 0.1) {
+      pixelArray[pixelID].style.opacity -= 0.25;
     }
-    if (pixelArray[+slider.value + resGrid * i].style.opacity <= "0.1") {
-      pixelArray[+slider.value + resGrid * i].style.backgroundColor =
-        "rgb(199, 204, 208)";
-      pixelArray[+slider.value + resGrid * i].style.opacity = "0.1";
+    if (pixelArray[pixelID].style.opacity <= 0.1) {
+      pixelArray[pixelID].style.backgroundColor = "rgb(199, 204, 208)";
+      pixelArray[pixelID].style.opacity = "0.1";
     }
   }
-});
-// slider
+}); // slider
 
 function setPenSettings(pixel, toggling, erasing) {
   if (!erasing && toggling && isColour) {
@@ -75,19 +71,14 @@ function setPenSettings(pixel, toggling, erasing) {
     pixel.style.opacity = "1";
   } //colour
   if (!erasing && toggling && !isColour) {
-    pixel.style.opacity -= "-0.1";
+    pixel.style.opacity -= -0.1;
     pixel.style.backgroundColor = "rgb(64, 46, 23)";
   } //black and white
   if (erasing && toggling) {
     pixel.style.backgroundColor = "rgb(199, 204, 208)";
     pixel.style.opacity = "0.1";
   } //erase
-  console.log(pixel.colourIndex);
 }
-
-resSelect.addEventListener("change", function (e) {
-  gameInit(+resSelect.value);
-});
 
 function gameInit(tiles) {
   board.innerHTML = "";
@@ -111,6 +102,10 @@ function gameInit(tiles) {
   }
 }
 
+resSelect.addEventListener("change", function (e) {
+  gameInit(+resSelect.value);
+});
+
 // "Show the dialog" button opens the dialog modally
 showButton.addEventListener("click", () => {
   dialog.showModal();
@@ -120,21 +115,3 @@ showButton.addEventListener("click", () => {
 closeButton.addEventListener("click", () => {
   dialog.close();
 });
-
-// function say() {
-//   return "hello world";
-// }
-
-// function wrong(callback) {
-//   console.log(callback);
-// }
-// function right(callback) {
-//   console.log(callback);
-// }
-// function usage(callback) {
-//   console.log(callback());
-// }
-
-// wrong(say());
-// right(say);
-// usage(say);
